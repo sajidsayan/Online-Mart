@@ -28,6 +28,7 @@ const totalPriceElement = document.getElementById('total-price')
 const totalDiscount = document.getElementById('total-discount')
 const priceAfterDiscount = document.getElementById('price-after-discount')
 const cartItem = document.getElementById('cart-item')
+const couponCode = document.getElementById('coupon-code')
 
 let itemList = [];
 let totalPrice = 0;
@@ -36,7 +37,8 @@ let discount = 0;
 couponButton.disabled = true;
 purchaseButton.disabled = true;
 
-function additem(item, price){
+function addItem(item, price){
+    console.log(item,price)
     itemList.push({ name: item, price: price})
     totalPrice += price
     updatePrice();
@@ -52,10 +54,39 @@ function removeitem(index){
 
 function updatePrice(){
     totalPriceElement.innerText = totalPrice.toFixed(2);
-    discount = 0;
     totalPriceElement.innerText = discount.toFixed(2);
     priceAfterDiscount.innerText = (totalPrice - discount).toFixed(2)
     purchaseButton.disabled = totalPrice === 0;
     couponButton.disabled = totalPrice < 100000
     renderList()
 }
+
+function renderList() {
+    cartItem.innerHTML = '';
+    itemList.forEach((item,index) =>{
+        cartItem.innerHTML += `<div class="flex item-center justify-between">
+        <span>${index + 1}. ${item.name}</span>
+        <span>
+        <i onclick="removeItem(${index})" class="fa-solid fa-close text-red-600 text-xl font-semibold mt-1 cursor-pointer"></i>
+        </span>
+        </div> `;
+    });
+
+}
+
+couponButton.addEventListener("click" , () =>{
+    const couponCode = couponCode.value.trim();
+    if (couponCode === "MART1978" && totalPrice >= 100000) {
+    } else{
+        discount = 0;
+    }
+    updatePrice()
+}
+
+purchaseButton.addEventListene("click",() => {
+    itemList = []
+    totalPrice = 0
+    discount = 0
+    couponCode.value = "";
+    updatePrice
+});
