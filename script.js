@@ -39,8 +39,8 @@ purchaseButton.disabled = true;
 
 function addItem(item, price){
     console.log(item,price)
-    itemList.push({ name: item, price: price})
-    totalPrice += price
+    itemList.push({ name: item, price: price});
+    totalPrice += price;
     updatePrice();
 }
 
@@ -54,7 +54,7 @@ function removeitem(index){
 
 function updatePrice(){
     totalPriceElement.innerText = totalPrice.toFixed(2);
-    totalPriceElement.innerText = discount.toFixed(2);
+    totalDiscount.innerText = discount.toFixed(2);
     priceAfterDiscount.innerText = (totalPrice - discount).toFixed(2)
     purchaseButton.disabled = totalPrice === 0;
     couponButton.disabled = totalPrice < 100000
@@ -80,13 +80,13 @@ couponButton.addEventListener("click" , () =>{
     } else{
         discount = 0;
     }
-    updatePrice()
-}
+    updatePrice();
+})
 
-purchaseButton.addEventListene("click",() => {
-    itemList = []
-    totalPrice = 0
-    discount = 0
+purchaseButton.addEventListener("click",() => {
+    itemList = [];
+    totalPrice = 0;
+    discount = 0;
     couponCode.value = "";
-    updatePrice
+    updatePrice();
 });
