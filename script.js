@@ -17,7 +17,7 @@ copyDiscountCoupon.addEventListener('click' , function(){
 
     setTimeout(() => {
         copyDiscountCoupon.textContent = discountText;
-    },1500);
+    },900);
 })
 
 
@@ -73,10 +73,10 @@ function renderList() {
     });
 
 }
-
 couponButton.addEventListener("click" , () =>{
-    const couponCode = couponCode.value.trim();
-    if (couponCode === "MART1978" && totalPrice >= 100000) {
+    const coupon = couponCode.value.trim();
+    if (coupon === "MART1978" && totalPrice >= 100000) {
+        discount = totalPrice*0.2
     } else{
         discount = 0;
     }
